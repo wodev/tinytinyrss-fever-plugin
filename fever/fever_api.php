@@ -19,6 +19,16 @@ class FeverAPI extends Handler {
 
 	private $xml;
 
+	private $dbh;
+
+        function __construct($args) {
+          // Legacy DB Connection
+          $this->dbh = Db::get();
+
+          // then execute the parent constructor anyway
+          parent::__construct($args);
+        }
+
 	// always include api_version, status as 'auth'
 	// output json/xml
 	function wrap($status, $reply)
@@ -46,6 +56,7 @@ class FeverAPI extends Handler {
 			}
 		}
 	}
+
 
 	// fever supports xml wrapped in <response> tags
 	private function array_to_xml($array, $container = 'response', $is_root = true)
