@@ -573,7 +573,7 @@ class FeverAPI extends Handler {
 					} else {
 						$since_id_new = $since_id;
 					}
-					$where .= "id < ? ";
+					$where .= "id > ? ";
 					$dbQueryParams = array_merge($dbQueryParams,[$since_id_new]);
 
 				}
