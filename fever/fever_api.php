@@ -597,7 +597,7 @@ class FeverAPI extends Handler {
 		while ($line = $sth->fetch())
 		{
 			$line_content = $this->my_sanitize($line["content"], $line["link"]);
-			if (ADD_ATTACHED_FILES){
+			if (self::ADD_ATTACHED_FILES){
 				$enclosures = Article::get_article_enclosures($line["id"]);
 				if (count($enclosures) > 0) {
 					$line_content .= '<ul type="lower-greek">';
