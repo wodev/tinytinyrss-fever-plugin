@@ -754,15 +754,6 @@ class FeverAPI extends Handler {
 			$sth->execute(array_merge($article_ids,[$_SESSION["uid"]]));
 			$num_updated = $sth->rowCount();
 
-			if ($num_updated > 0 && $field == "unread") {
-				$sth = $this->pdo->prepare("SELECT DISTINCT feed_id FROM ttrss_user_entries
-									WHERE ref_id IN ($id_qmarks)");
-				$sth->execute($article_ids);
-
-				while ($line = $sth->fetch()) {
-					CCache::update($line["feed_id"], $_SESSION["uid"]);
-				}
-			}
 		}
 	}
 
@@ -845,7 +836,6 @@ class FeverAPI extends Handler {
 					$dbQueryParams = array_merge($dbQueryParams,[$select_date]);
 					$sth->execute($dbQueryParams);
 			}
-			CCache::update($id,$_SESSION["uid"], $cat);
 		}
 	}
 
